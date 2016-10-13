@@ -262,7 +262,8 @@
         onSelect: null,
         onOpen: null,
         onClose: null,
-        onDraw: null
+        onDraw: null,
+        beforeShow:null,
     },
 
 
@@ -1130,6 +1131,9 @@
         show: function()
         {
             if (!this.isVisible()) {
+                if (typeof this._o.beforeShow === 'function') {
+                    this._o.beforeShow.call(this);
+                }
                 removeClass(this.el, 'is-hidden');
                 this._v = true;
                 this.draw();
